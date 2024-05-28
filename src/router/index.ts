@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw, RouteLocationNormalized, NavigationGuardNext } from 'vue-router'
-import { useUserStore } from '@/stores/user'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 //защита роутинга
 const checkAuth = (
@@ -8,12 +8,16 @@ const checkAuth = (
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) => {
-  const userStore = useUserStore()
-  if (to.name !== 'Auth' && !userStore.userId) {
-    next({ name: 'Auth' })
-  } else {
-    next()
-  }
+  let isAuth = false
+  onAuthStateChanged(getAuth(), (user) => {
+    if (user && !isAuth) {
+      isAuth = true
+      next()
+    } else if (to.name != 'Auth' && !user && !isAuth) {
+      isAuth = true
+      next('/auth')
+    }
+  })
 }
 
 const routes: RouteRecordRaw[] = [
