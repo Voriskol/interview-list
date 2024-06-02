@@ -15,6 +15,12 @@ import InputText from 'primevue/inputtext'
 import Toast from 'primevue/toast'
 import ToastService from 'primevue/toastservice'
 import ProgressSpinner from 'primevue/progressspinner'
+import Card from 'primevue/card'
+import DataTable from 'primevue/datatable'
+import Column from 'primevue/column'
+import ConfirmDialog from 'primevue/confirmdialog'
+import ConfirmationService from 'primevue/confirmationservice'
+import InlineMessage from 'primevue/inlinemessage'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -32,6 +38,7 @@ initializeApp(firebaseConfig)
 const app = createApp(App)
 
 app.use(createPinia())
+app.use(ConfirmationService)
 app.use(router)
 app.use(PrimeVue)
 app.use(ToastService)
@@ -40,5 +47,10 @@ app.component('app-button', Button)
 app.component('app-input-text', InputText)
 app.component('app-toast', Toast)
 app.component('app-progress', ProgressSpinner)
+app.component('app-card', Card)
+app.component('app-datatable', DataTable)
+app.component('app-column', Column)
+app.component('app-dialog', ConfirmDialog)
+app.component('app-message', InlineMessage)
 
 app.mount('#app')

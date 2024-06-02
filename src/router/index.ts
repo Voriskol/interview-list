@@ -2,18 +2,18 @@ import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw, RouteLocationNormalized, NavigationGuardNext } from 'vue-router'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
-//защита роутинга
 const checkAuth = (
   to: RouteLocationNormalized,
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) => {
   let isAuth = false
+
   onAuthStateChanged(getAuth(), (user) => {
     if (user && !isAuth) {
       isAuth = true
       next()
-    } else if (to.name != 'Auth' && !user && !isAuth) {
+    } else if (!user && !isAuth) {
       isAuth = true
       next('/auth')
     }
@@ -30,8 +30,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/auth',
     name: 'Auth',
-    component: () => import('@/views/PageAuth.vue'),
-    beforeEnter: checkAuth
+    component: () => import('@/views/PageAuth.vue')
   },
   {
     path: '/interview/:id',
