@@ -21,7 +21,11 @@ import Column from 'primevue/column'
 import ConfirmDialog from 'primevue/confirmdialog'
 import ConfirmationService from 'primevue/confirmationservice'
 import InlineMessage from 'primevue/inlinemessage'
-
+import InputNumber from 'primevue/inputnumber'
+import Textarea from 'primevue/textarea'
+import InputMask from 'primevue/inputmask'
+import Calendar from 'primevue/calendar'
+import RadioButton from 'primevue/radiobutton'
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyDek3ZP6Vt8cEM83jrlMqeBsGB1vJ29fUw',
@@ -52,5 +56,10 @@ app.component('app-datatable', DataTable)
 app.component('app-column', Column)
 app.component('app-dialog', ConfirmDialog)
 app.component('app-message', InlineMessage)
+app.component('app-input-number', InputNumber)
+app.component('app-textarea', Textarea)
+app.component('app-input-mask', InputMask)
+app.component('app-calendar', Calendar)
+app.component('app-radio', RadioButton)
 
 app.mount('#app')
