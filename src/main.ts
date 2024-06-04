@@ -26,6 +26,8 @@ import Textarea from 'primevue/textarea'
 import InputMask from 'primevue/inputmask'
 import Calendar from 'primevue/calendar'
 import RadioButton from 'primevue/radiobutton'
+import Badge from 'primevue/badge'
+import Tooltip from 'primevue/tooltip'
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyDek3ZP6Vt8cEM83jrlMqeBsGB1vJ29fUw',
@@ -46,6 +48,7 @@ app.use(ConfirmationService)
 app.use(router)
 app.use(PrimeVue)
 app.use(ToastService)
+app.directive('tooltip', Tooltip)
 app.component('app-menubar', Menubar)
 app.component('app-button', Button)
 app.component('app-input-text', InputText)
@@ -61,5 +64,6 @@ app.component('app-textarea', Textarea)
 app.component('app-input-mask', InputMask)
 app.component('app-calendar', Calendar)
 app.component('app-radio', RadioButton)
+app.component('app-badge', Badge)
 
 app.mount('#app')

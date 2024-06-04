@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore'
+import { getFirestore, doc, getDoc, updateDoc, Timestamp } from 'firebase/firestore'
 import { useUserStore } from '@/stores/user'
 import type { IStage, IInterview } from '@/interfaces'
-import dayjs from 'dayjs'
 
 const database = getFirestore()
 const userStore = useUserStore()
@@ -18,8 +17,24 @@ const docref = doc(database, `users/${userStore.userId}/interviews`, route.param
 const getData = async (): Promise<void> => {
   isLoading.value = true
   const docSnap = await getDoc(docref)
-  interview.value = docSnap.data() as IInterview
+  if (docSnap.exists()) {
+    const data = docSnap.data() as IInterview
+    if (data.stages && data.stages.length) {
+      data.stages = data.stages.map((stage: IStage) => {
+        if (stage.date && stage.date instanceof Timestamp) {
+          return {
+            ...stage,
+            date: stage.date.toDate()
+          }
+        }
+        return stage
+      })
+    }
+    interview.value = data
+  }
+
   isLoading.value = false
+  console.log(interview.value)
 }
 
 const addStage = () => {
@@ -27,7 +42,7 @@ const addStage = () => {
     if (!interview.value.stages) {
       interview.value.stages = []
     }
-    interview.value.stages.push({ name: '', date: '', description: '' })
+    interview.value.stages.push({ name: '', date: null, description: '' })
   }
 }
 
@@ -36,8 +51,7 @@ const saveInterview = async (): Promise<void> => {
   if (interview.value?.stages && interview.value.stages.length) {
     interview.value.stages = interview.value.stages.map((stage: IStage) => {
       return {
-        ...stage,
-        date: dayjs(stage.date).format('DD.MM.YYYY')
+        ...stage
       }
     })
   }
@@ -51,13 +65,6 @@ const removeStage = (index: number) => {
     if (interview.value.stages) {
       interview.value.stages.splice(index, 1)
     }
-  }
-}
-
-const saveDateStage = (index: number) => {
-  if (interview.value?.stages && interview.value.stages.length) {
-    const date = interview.value.stages[index].date
-    interview.value.stages[index].date = dayjs(date).format('DD.MM.YYYY')
   }
 }
 
@@ -158,7 +165,6 @@ onMounted(async () => await getData())
                 class="input mb-3"
                 :id="`stage-date-${index}`"
                 dateFormat="dd.mm.yy"
-                @date-select="saveDateStage(index)"
                 v-model="stage.date"
               ></app-calendar>
             </div>
