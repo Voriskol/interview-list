@@ -28,6 +28,7 @@ import Calendar from 'primevue/calendar'
 import RadioButton from 'primevue/radiobutton'
 import Badge from 'primevue/badge'
 import Tooltip from 'primevue/tooltip'
+import Chart from 'primevue/chart'
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyDek3ZP6Vt8cEM83jrlMqeBsGB1vJ29fUw',
@@ -65,5 +66,6 @@ app.component('app-input-mask', InputMask)
 app.component('app-calendar', Calendar)
 app.component('app-radio', RadioButton)
 app.component('app-badge', Badge)
+app.component('app-chart', Chart)
 
 app.mount('#app')
