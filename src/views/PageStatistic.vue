@@ -34,7 +34,6 @@ const getAllInterviews = async <T extends IInterview>(): Promise<T[]> => {
 onMounted(async () => {
   interviews.value = await getAllInterviews()
   chartData.value = setChartData()
-  chartOptions.value = setChartOptions()
 })
 
 const setChartData = () => {
