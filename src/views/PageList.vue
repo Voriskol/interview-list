@@ -94,7 +94,7 @@ onMounted(async () => {
   >
   <div v-else>
     <h1>Список собеседований</h1>
-    <div class="flex align-tems-center mb-5">
+    <div class="flex align-tems-center mb-5 filters">
       <div class="flex align-items-center mr-5">
         <app-radio
           inputId="interviewResult1"
@@ -212,6 +212,11 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+.filters {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 3px;
+}
 .contacts {
   display: flex;
   align-items: center;

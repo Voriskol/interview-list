@@ -1,3 +1,12 @@
 body {
   margin: 0;
 }
+
+html {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/public/mountain-peak-birds-horizon-digital-art.jpg');
+  background-size: cover;
+}
+
+h1 {
+  color: aliceblue;
+}

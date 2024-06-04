@@ -1,6 +1,6 @@
 <template>
   <h1>Статистика</h1>
-  <div class="card flex justify-content-center">
+  <div class="card flex justify-content-center filters">
     <app-chart
       type="doughnut"
       :data="chartData"
@@ -71,3 +71,12 @@ const setChartData = () => {
   }
 }
 </script>
+
+<style scoped>
+.filters {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 3px;
+  opacity: 0.9;
+}
+</style>
