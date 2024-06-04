@@ -34,6 +34,7 @@ const getAllInterviews = async <T extends IInterview>(): Promise<T[]> => {
 onMounted(async () => {
   interviews.value = await getAllInterviews()
   chartData.value = setChartData()
+  chartOptions.value = setChartOptions()
 })
 
 const setChartData = () => {
@@ -67,6 +68,22 @@ const setChartData = () => {
         ]
       }
     ]
+  }
+}
+
+const setChartOptions = () => {
+  const documentStyle = getComputedStyle(document.documentElement)
+  const textColor = documentStyle.getPropertyValue('--text-color')
+
+  return {
+    plugins: {
+      legend: {
+        labels: {
+          cutout: '60%',
+          color: textColor
+        }
+      }
+    }
   }
 }
 </script>
