@@ -20,7 +20,7 @@ const userStore = useUserStore()
 const db = getFirestore()
 const interviews = ref<IInterview[]>([])
 const chartData = ref()
-const chartOptions = ref(null)
+const chartOptions = ref()
 
 const getAllInterviews = async <T extends IInterview>(): Promise<T[]> => {
   const getData = query(
